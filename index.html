@@ -25,10 +25,14 @@
         .header-container {
             display: flex;
             align-items: center;
+            width: 100%;
+            justify-content: space-between;
         }
         .header-container h1 {
-            margin-right: 20px;
             font-size: 28px;
+        }
+        nav {
+            margin-left: auto;
         }
         nav ul {
             list-style: none;
@@ -48,64 +52,38 @@
             transition: all 0.3s ease-in-out;
             position: relative;
         }
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 100%;
-            height: 3px;
-            background: #007bff;
-            transform: scaleX(0);
-            transition: transform 0.3s ease-in-out;
-        }
         nav ul li a:hover {
             color: #007bff;
             transform: scale(1.1);
         }
-        nav ul li a:hover::after {
-            transform: scaleX(1);
+        .tile-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .tile {
+            background: #222;
+            padding: 20px;
+            width: 250px;
+            height: 150px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+        }
+        .tile:hover {
+            transform: scale(1.05);
+            background: #007bff;
+        }
+        .tile a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
         }
         section {
             padding: 20px;
             border-bottom: 1px solid #333;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .blog-post {
-            background: #222;
-            padding: 15px;
-            margin: 10px 0;
-        }
-        form {
-            text-align: left;
-        }
-        form input, form textarea {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            background: #333;
-            color: #fff;
-            border: none;
-        }
-        button {
-            background: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
         }
         footer {
             text-align: center;
@@ -130,62 +108,24 @@
         </div>
     </header>
     
-    <section id="home">
-        <h2 class="animated-text">Welcome to Espionage</h2>
-        <p class="animated-text">Your source for intelligence in finance, tech, economics, and geopolitics.</p>
-    </section>
-    
     <section id="blogs">
         <h2 class="animated-text">Latest Blogs</h2>
-        <div class="blog-list">
-            <article class="blog-post animated-text"> <h3>Article Title 1</h3> <p>Snippet of the article...</p> </article>
-            <article class="blog-post animated-text"> <h3>Article Title 2</h3> <p>Snippet of the article...</p> </article>
+        <div class="tile-container">
+            <div class="tile"><a href="#">Article Title 1</a><p>Snippet of the article...</p></div>
+            <div class="tile"><a href="#">Article Title 2</a><p>Snippet of the article...</p></div>
         </div>
     </section>
     
     <section id="recent">
         <h2 class="animated-text">Recent Activity</h2>
-        <p class="animated-text">Breaking news and latest developments.</p>
-    </section>
-    
-    <section id="write">
-        <h2 class="animated-text">Write for Us</h2>
-        <form>
-            <label for="name" class="animated-text">Name:</label>
-            <input type="text" id="name" name="name">
-            <label for="email" class="animated-text">Email:</label>
-            <input type="email" id="email" name="email">
-            <label for="message" class="animated-text">Your Proposal:</label>
-            <textarea id="message" name="message"></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-    
-    <section id="social">
-        <h2 class="animated-text">Follow Us</h2>
-        <p class="animated-text">Links to social media platforms.</p>
+        <div class="tile-container">
+            <div class="tile"><a href="#">News 1</a><p>Snippet of the news...</p></div>
+            <div class="tile"><a href="#">News 2</a><p>Snippet of the news...</p></div>
+        </div>
     </section>
     
     <footer>
         <p class="animated-text">&copy; 2025 Espionage. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelector("form").addEventListener("submit", function (event) {
-                event.preventDefault();
-                alert("Thank you for your submission! We will review your proposal.");
-                this.reset();
-            });
-
-            let elements = document.querySelectorAll(".animated-text");
-            elements.forEach((el, index) => {
-                el.style.opacity = 0;
-                el.style.animation = `fadeInUp 1s ease-in-out ${index * 0.2}s forwards`;
-            });
-        });
-    </script>
 </body>
 </html>
-
-
