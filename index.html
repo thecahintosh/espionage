@@ -90,6 +90,32 @@
             padding: 20px;
             background: #000;
         }
+        form {
+            background: #222;
+            padding: 20px;
+            margin: 20px auto;
+            width: 50%;
+            border-radius: 8px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+        }
+        button {
+            background: #007bff;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -108,6 +134,11 @@
         </div>
     </header>
     
+    <section id="home">
+        <h2 class="animated-text">Welcome to Espionage</h2>
+        <p class="animated-text">Your top source for intelligence on finance, tech, economics, and geopolitics. Stay ahead with in-depth analysis and breaking news.</p>
+    </section>
+    
     <section id="blogs">
         <h2 class="animated-text">Latest Blogs</h2>
         <div class="tile-container">
@@ -122,6 +153,27 @@
             <div class="tile"><a href="#">News 1</a><p>Snippet of the news...</p></div>
             <div class="tile"><a href="#">News 2</a><p>Snippet of the news...</p></div>
         </div>
+    </section>
+    
+    <section id="write">
+        <h2 class="animated-text">Write for Us</h2>
+        <p class="animated-text">Have insights on finance, tech, or geopolitics? We welcome guest contributors. Submit your articles and be part of the intelligence network.</p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Article" rows="6" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    
+    <section id="social">
+        <h2 class="animated-text">Follow Us on Social Media</h2>
+        <p class="animated-text">Stay updated with the latest news. Connect with us on:</p>
+        <ul>
+            <li><a href="#" class="animated-text">Twitter</a></li>
+            <li><a href="#" class="animated-text">LinkedIn</a></li>
+            <li><a href="#" class="animated-text">Facebook</a></li>
+        </ul>
     </section>
     
     <footer>
