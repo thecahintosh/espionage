@@ -323,6 +323,32 @@
         form > *:nth-child(2) { animation-delay: 0.2s; }
         form > *:nth-child(3) { animation-delay: 0.3s; }
         form > *:nth-child(4) { animation-delay: 0.4s; }
+        .loading-spinner {
+            padding: 20px;
+            text-align: center;
+            color: #007bff;
+        }
+        .load-more-btn {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .load-more-btn:hover {
+            background: linear-gradient(145deg, #0056b3, #004494);
+            transform: translateY(-2px);
+        }
+        .load-more-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
     </style>
 </head>
 <body>
@@ -348,26 +374,20 @@
     
     <section id="blogs">
         <h2 class="animated-text">Latest Blogs</h2>
-        <div class="tile-container">
-            <div class="tile"><a href="#">Article Title 1</a><p>Snippet of the article...</p></div>
-            <div class="tile"><a href="#">Article Title 2</a><p>Snippet of the article...</p></div>
-            <div class="tile"><a href="#">Article Title 3</a><p>Snippet of the article...</p></div>
-            <div class="tile"><a href="#">Article Title 4</a><p>Snippet of the article...</p></div>
-            <div class="tile"><a href="#">Article Title 5</a><p>Snippet of the article...</p></div>
-            <div class="tile"><a href="#">Article Title 6</a><p>Snippet of the article...</p></div>
+        <div class="tile-container" id="blogs-container">
+            <!-- Initial tiles will be loaded here -->
         </div>
+        <div class="loading-spinner" id="blogs-spinner" style="display: none;">Loading...</div>
+        <button class="load-more-btn" id="load-more-blogs">Load More</button>
     </section>
     
     <section id="recent">
         <h2 class="animated-text">Recent Activity</h2>
-        <div class="tile-container">
-            <div class="tile"><a href="#">News 1</a><p>Snippet of the news...</p></div>
-            <div class="tile"><a href="#">News 2</a><p>Snippet of the news...</p></div>
-            <div class="tile"><a href="#">News 3</a><p>Snippet of the news...</p></div>
-            <div class="tile"><a href="#">News 4</a><p>Snippet of the news...</p></div>
-            <div class="tile"><a href="#">News 5</a><p>Snippet of the news...</p></div>
-            <div class="tile"><a href="#">News 6</a><p>Snippet of the news...</p></div>
+        <div class="tile-container" id="recent-container">
+            <!-- Initial tiles will be loaded here -->
         </div>
+        <div class="loading-spinner" id="recent-spinner" style="display: none;">Loading...</div>
+        <button class="load-more-btn" id="load-more-recent">Load More</button>
     </section>
     
     <section id="write">
@@ -407,6 +427,81 @@
     <footer>
         <p class="animated-text">&copy; 2025 Espionage. All rights reserved.</p>
     </footer>
+
+    <script>
+        
+        const blogPosts = Array.from({ length: 100 }, (_, i) => ({
+            title: `Article Title ${i + 1}`,
+            snippet: `Snippet of the article ${i + 1}...`
+        }));
+
+        const recentActivity = Array.from({ length: 100 }, (_, i) => ({
+            title: `News ${i + 1}`,
+            snippet: `Snippet of the news ${i + 1}...`
+        }));
+
+        
+        const itemsPerLoad = 6;
+        let blogsPage = 0;
+        let recentPage = 0;
+        let isLoadingBlogs = false;
+        let isLoadingRecent = false;
+
+        
+        function createTileHTML(item) {
+            return `
+                <div class="tile">
+                    <a href="#">${item.title}</a>
+                    <p>${item.snippet}</p>
+                </div>
+            `;
+        }
+        async function loadMoreItems(container, spinner, button, items, page) {
+            if (isLoadingBlogs || isLoadingRecent) return;
+            
+            spinner.style.display = 'block';
+            button.disabled = true;
+            
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            const start = page * itemsPerLoad;
+            const end = start + itemsPerLoad;
+            const newItems = items.slice(start, end);
+
+            if (newItems.length > 0) {
+                const html = newItems.map(createTileHTML).join('');
+                container.insertAdjacentHTML('beforeend', html);
+                button.disabled = false;
+            } else {
+                button.style.display = 'none';
+            }
+            
+            spinner.style.display = 'none';
+            return newItems.length > 0;
+        }
+
+        
+        const blogsContainer = document.getElementById('blogs-container');
+        const recentContainer = document.getElementById('recent-container');
+        const blogsSpinner = document.getElementById('blogs-spinner');
+        const recentSpinner = document.getElementById('recent-spinner');
+        const loadMoreBlogsBtn = document.getElementById('load-more-blogs');
+        const loadMoreRecentBtn = document.getElementById('load-more-recent');
+
+        
+        loadMoreItems(blogsContainer, blogsSpinner, loadMoreBlogsBtn, blogPosts, blogsPage++);
+        loadMoreItems(recentContainer, recentSpinner, loadMoreRecentBtn, recentActivity, recentPage++);
+
+        
+        loadMoreBlogsBtn.addEventListener('click', () => {
+            loadMoreItems(blogsContainer, blogsSpinner, loadMoreBlogsBtn, blogPosts, blogsPage++);
+        });
+
+        loadMoreRecentBtn.addEventListener('click', () => {
+            loadMoreItems(recentContainer, recentSpinner, loadMoreRecentBtn, recentActivity, recentPage++);
+        });
+    </script>
 </body>
 </html>
 
