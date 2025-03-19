@@ -76,12 +76,11 @@
             transform: translateY(-10px);
             background: linear-gradient(145deg, #0066cc, #007bff);
         }
-        .tile a {
+        .tile h3, .tile p {
             color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
+        }
+        .tile a, .tile a:visited {
+            color: #ffffff;
         }
         section {
             padding: 20px;
@@ -479,19 +478,19 @@
         const blogPosts = [
             {
                 title: "The Rise of Digital Currency in Modern Banking",
-                snippet: "An analysis of how cryptocurrencies and CBDCs are reshaping traditional financial systems and what this means for global economics...",
+                snippet: "Lorem",
                 image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 url: "articlepage.html"
             },
             {
-                title: "Artificial Intelligence: The New Arms Race",
-                snippet: "Exploring how nations are competing for AI supremacy and the implications for global security and technological advancement...",
+                title: "Artificial Intelligence",
+                snippet: "Lorem",
                 image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 url: "articlepage.html"
             },
             {
-                title: "Supply Chain Disruptions: A Global Perspective",
-                snippet: "Understanding the ongoing challenges in global supply chains and their impact on international trade and economic stability...",
+                title: "Supply Chain Disruptions",
+                snippet: "Lorem",
                 image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 url: "articlepage.html"
             }
@@ -499,30 +498,30 @@
         const recentActivity = [
             {
                 title: "Breaking: Major Tech Merger Announced",
-                snippet: "Silicon Valley giants announce unprecedented merger, raising concerns about market concentration and regulatory scrutiny...",
+                snippet: "Lorem",
                 image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 url: ""
             },
             {
-                title: "Economic Alert: Federal Reserve Policy Shift",
-                snippet: "Federal Reserve signals major policy changes, impacting global markets and currency exchange rates...",
+                title: "Economic Alert",
+                snippet: "Lorem",
                 image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 url: ""
             },
             {
-                title: "Geopolitical Update: Trade Agreement Breakthrough",
-                snippet: "New international trade agreement set to reshape Pacific rim economic relationships and supply chains...",
+                title: "Geopolitical Update",
+                snippet: "Lorem",
                 image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 url: ""
             }
         ];
         function createTileHTML(item) {
             return `
-                <a href="${item.url}" style="text-decoration: none;">
+                <a href="${item.url}" style="text-decoration: none; color: #ffffff;">
                     <div class="tile">
                         <img src="${item.image}" alt="${item.title}" class="tile-image">
-                        <h3>${item.title}</h3>
-                        <p>${item.snippet}</p>
+                        <h3 style="color: #ffffff;">${item.title}</h3>
+                        <p style="color: #ffffff;">${item.snippet}</p>
                     </div>
                 </a>
             `;
