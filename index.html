@@ -57,7 +57,7 @@
         }
         .tile-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             padding: 30px;
             overflow: visible;
@@ -66,9 +66,11 @@
             background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
             border-radius: 15px;
             padding: 25px;
-            min-height: 200px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            display: grid;
+            grid-template-rows: 160px auto auto;
+            gap: 15px;
         }
         .tile:hover {
             transform: translateY(-10px);
@@ -79,6 +81,7 @@
             text-decoration: none;
             font-weight: bold;
             display: block;
+            margin-top: 10px;
         }
         section {
             padding: 20px;
@@ -349,6 +352,54 @@
             cursor: not-allowed;
             transform: none;
         }
+        .submit-article-btn {
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .submit-article-btn button {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-article-btn button:hover {
+            background: linear-gradient(145deg, #0056b3, #004494);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4);
+        }
+
+        .submit-article-btn button:active {
+            transform: translateY(1px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+        .section-header-img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .tile-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -369,36 +420,30 @@
     
     <section id="home">
         <h2 class="animated-text">Welcome to Espionage</h2>
+        <img src="𝐂𝐡𝐢𝐥𝐥.jpeg" 
+             alt="Welcome Header" 
+             class="section-header-img">
         <p class="animated-text">Your top source for intelligence on finance, tech, economics, and geopolitics. Stay ahead with in-depth analysis and breaking news.</p>
     </section>
     
     <section id="blogs">
         <h2 class="animated-text">Latest Blogs</h2>
-        <div class="tile-container" id="blogs-container">
-            <!-- Initial tiles will be loaded here -->
+        <div class="tile-container">
         </div>
-        <div class="loading-spinner" id="blogs-spinner" style="display: none;">Loading...</div>
-        <button class="load-more-btn" id="load-more-blogs">Load More</button>
     </section>
     
     <section id="recent">
         <h2 class="animated-text">Recent Activity</h2>
-        <div class="tile-container" id="recent-container">
-            <!-- Initial tiles will be loaded here -->
+        <div class="tile-container">
         </div>
-        <div class="loading-spinner" id="recent-spinner" style="display: none;">Loading...</div>
-        <button class="load-more-btn" id="load-more-recent">Load More</button>
     </section>
     
     <section id="write">
         <h2 class="animated-text">Write for Us</h2>
         <p class="animated-text">Have finance, tech, or geopolitics insights? We welcome guest contributors. Submit your articles and be part of the intelligence network.</p>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Article" rows="6" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
+        <a href="https://sleet-parade-51b.notion.site/1ba72ed075dd8085b439c0181f29e05e?pvs=105" class="submit-article-btn">
+            <button type="button">Submit your article</button>
+        </a>
     </section>
     
     <section id="social">
@@ -429,78 +474,61 @@
     </footer>
 
     <script>
-        
-        const blogPosts = Array.from({ length: 100 }, (_, i) => ({
-            title: `Article Title ${i + 1}`,
-            snippet: `Snippet of the article ${i + 1}...`
-        }));
-
-        const recentActivity = Array.from({ length: 100 }, (_, i) => ({
-            title: `News ${i + 1}`,
-            snippet: `Snippet of the news ${i + 1}...`
-        }));
-
-        
-        const itemsPerLoad = 6;
-        let blogsPage = 0;
-        let recentPage = 0;
-        let isLoadingBlogs = false;
-        let isLoadingRecent = false;
-
-        
+        const blogsContainer = document.querySelector('#blogs .tile-container');
+        const recentContainer = document.querySelector('#recent .tile-container');
+        const blogPosts = [
+            {
+                title: "The Rise of Digital Currency in Modern Banking",
+                snippet: "An analysis of how cryptocurrencies and CBDCs are reshaping traditional financial systems and what this means for global economics...",
+                image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                url: "articlepage.html"
+            },
+            {
+                title: "Artificial Intelligence: The New Arms Race",
+                snippet: "Exploring how nations are competing for AI supremacy and the implications for global security and technological advancement...",
+                image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                url: "articlepage.html"
+            },
+            {
+                title: "Supply Chain Disruptions: A Global Perspective",
+                snippet: "Understanding the ongoing challenges in global supply chains and their impact on international trade and economic stability...",
+                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                url: "articlepage.html"
+            }
+        ];
+        const recentActivity = [
+            {
+                title: "Breaking: Major Tech Merger Announced",
+                snippet: "Silicon Valley giants announce unprecedented merger, raising concerns about market concentration and regulatory scrutiny...",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                url: ""
+            },
+            {
+                title: "Economic Alert: Federal Reserve Policy Shift",
+                snippet: "Federal Reserve signals major policy changes, impacting global markets and currency exchange rates...",
+                image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                url: ""
+            },
+            {
+                title: "Geopolitical Update: Trade Agreement Breakthrough",
+                snippet: "New international trade agreement set to reshape Pacific rim economic relationships and supply chains...",
+                image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                url: ""
+            }
+        ];
         function createTileHTML(item) {
             return `
-                <div class="tile">
-                    <a href="#">${item.title}</a>
-                    <p>${item.snippet}</p>
-                </div>
+                <a href="${item.url}" style="text-decoration: none;">
+                    <div class="tile">
+                        <img src="${item.image}" alt="${item.title}" class="tile-image">
+                        <h3>${item.title}</h3>
+                        <p>${item.snippet}</p>
+                    </div>
+                </a>
             `;
         }
-        async function loadMoreItems(container, spinner, button, items, page) {
-            if (isLoadingBlogs || isLoadingRecent) return;
-            
-            spinner.style.display = 'block';
-            button.disabled = true;
-            
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 800));
-
-            const start = page * itemsPerLoad;
-            const end = start + itemsPerLoad;
-            const newItems = items.slice(start, end);
-
-            if (newItems.length > 0) {
-                const html = newItems.map(createTileHTML).join('');
-                container.insertAdjacentHTML('beforeend', html);
-                button.disabled = false;
-            } else {
-                button.style.display = 'none';
-            }
-            
-            spinner.style.display = 'none';
-            return newItems.length > 0;
-        }
-
-        
-        const blogsContainer = document.getElementById('blogs-container');
-        const recentContainer = document.getElementById('recent-container');
-        const blogsSpinner = document.getElementById('blogs-spinner');
-        const recentSpinner = document.getElementById('recent-spinner');
-        const loadMoreBlogsBtn = document.getElementById('load-more-blogs');
-        const loadMoreRecentBtn = document.getElementById('load-more-recent');
-
-        
-        loadMoreItems(blogsContainer, blogsSpinner, loadMoreBlogsBtn, blogPosts, blogsPage++);
-        loadMoreItems(recentContainer, recentSpinner, loadMoreRecentBtn, recentActivity, recentPage++);
-
-        
-        loadMoreBlogsBtn.addEventListener('click', () => {
-            loadMoreItems(blogsContainer, blogsSpinner, loadMoreBlogsBtn, blogPosts, blogsPage++);
-        });
-
-        loadMoreRecentBtn.addEventListener('click', () => {
-            loadMoreItems(recentContainer, recentSpinner, loadMoreRecentBtn, recentActivity, recentPage++);
-        });
+        blogsContainer.innerHTML = blogPosts.map(createTileHTML).join('');
+        recentContainer.innerHTML = recentActivity.map(createTileHTML).join('');
     </script>
 </body>
 </html>
