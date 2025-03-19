@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espionage - Intelligence News</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(to right, #000000, #1a1a1a);
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .header-container h1 {
+            font-size: 28px;
+        }
+        nav {
+            margin-left: auto;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        nav ul li a:hover {
+            color: #ffffff;
+            background: #007bff;
+            transform: translateY(-2px);
+        }
+        .tile-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 30px;
+            overflow: visible;
+        }
+        .tile {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: grid;
+            grid-template-rows: 160px auto auto;
+            gap: 15px;
+        }
+        .tile:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(145deg, #0066cc, #007bff);
+        }
+        .tile a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        section {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.2s;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+        }
+        form {
+            background: linear-gradient(145deg, rgba(42, 42, 42, 0.8), rgba(26, 26, 26, 0.9));
+            padding: 50px;
+            margin: 40px auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+        }
+        input, textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding: 20px 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.4s ease;
+            outline: none;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+        input:hover, textarea:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        input:focus, textarea:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #007bff;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        button[type="submit"] {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+            margin-top: 15px;
+            align-self: center;
+            width: auto;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        button[type="submit"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: all 0.6s ease;
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(145deg, #0056b3, #004494);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4);
+        }
+        button[type="submit"]:hover::before {
+            transform: translateX(100%);
+        }
+        button[type="submit"]:active {
+            transform: translateY(1px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+            justify-content: center;
+            align-items: center;
+            margin: 2em auto;
+            max-width: 600px;
+        }
+        .up, .down {
+            display: flex;
+            flex-direction: row;
+            gap: 2em;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .social-card {
+            width: 120px;
+            height: 120px;
+            outline: none;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2));
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .social-card::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.4s ease;
+        }
+        .social-card:hover {
+            transform: translateY(-15px) scale(1.1);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+        }
+        .social-card:hover::before {
+            opacity: 1;
+        }
+        .social-card:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .social-card svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .social-card:hover svg {
+            transform: scale(1.2) rotate(8deg);
+        }
+        .instagram-card {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+        .twitter-card {
+            background: #1DA1F2;
+        }
+        .github-card {
+            background: #333;
+        }
+        .discord-card {
+            background: #7289DA;
+        }
+        .instagram-card:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        .twitter-card:hover {
+            background: linear-gradient(45deg, #1DA1F2 0%, #19b7ff 50%, #71d3ff 100%);
+        }
+        .social-card:hover {
+            animation: pulse 2s infinite;
+        }
+        #social h2 {
+            font-size: 2.5em;
+            margin-bottom: 1em;
+            color: #ffffff;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+        }
+        #social p {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 2em;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes formFieldFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        form > * {
+            animation: formFieldFadeIn 0.5s ease forwards;
+        }
+        form > *:nth-child(1) { animation-delay: 0.1s; }
+        form > *:nth-child(2) { animation-delay: 0.2s; }
+        form > *:nth-child(3) { animation-delay: 0.3s; }
+        form > *:nth-child(4) { animation-delay: 0.4s; }
+        .loading-spinner {
+            padding: 20px;
+            text-align: center;
+            color: #007bff;
+        }
+        .load-more-btn {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .load-more-btn:hover {
+            background: linear-gradient(145deg, #0056b3, #004494);
+            transform: translateY(-2px);
+        }
+        .load-more-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .submit-article-btn {
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .submit-article-btn button {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-article-btn button:hover {
+            background: linear-gradient(145deg, #0056b3, #004494);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4);
+        }
+
+        .submit-article-btn button:active {
+            transform: translateY(1px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+        .section-header-img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .tile-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .article-section {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        article {
+            margin-bottom: 80px;
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        article h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #ffffff, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .article-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .article-content p:first-child {
+            margin-top: 20px;
+        }
+
+        .article-content p {
+            margin: 20px 0;
+            color: #e6e6e6;
+            font-size: 1.1em;
+            line-height: 1.8;
+            letter-spacing: 0.2px;
+        }
+
+        .article-img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 30px auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .article-img:hover {
+            transform: scale(1.02);
+        }
+
+        .section-header-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        hr {
+            margin: 60px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent
+            );
+        }
+        article {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .reading-time {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin: 10px 0 20px 0;
+        }
+
+        .article-meta {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin: 10px 0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #social {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            padding: 60px 0;
+            margin-top: 40px;
+        }
+
+        #social h2 {
+            font-size: 2.5em;
+            margin-bottom: 1em;
+            background: linear-gradient(45deg, #ffffff, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        article {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #1a1a1a);
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="animated-text">Espionage</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="animated-text">Home</a></li>
+                    <li><a href="#blogs" class="animated-text">Blogs</a></li>
+                    <li><a href="#recent" class="animated-text">Recent Activity</a></li>
+                    <li><a href="#write" class="animated-text">Write for Us</a></li>
+                    <li><a href="#social" class="animated-text">Social Media</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="article-section">
+        <article>
+            <h1>The Economic Impact of Artificial Intelligence on Global Markets</h1>
+            <div class="article-meta">
+                <span>Published: March 2024</span> • <span>5 min read</span>
+            </div>
+            <div class="article-content" style="text-align: justify;">
+                <p>The integration of artificial intelligence into global financial markets has sparked a revolutionary transformation in how we approach trading, investment, and economic forecasting. Recent studies suggest that AI-driven algorithms now account for over 70% of daily trading volume in major exchanges.</p>
+                <img class="section-header-img">
+                <p>Machine learning models have demonstrated unprecedented accuracy in predicting market trends, often outperforming traditional analytical methods by a significant margin. Financial institutions implementing AI-based systems have reported a 35% improvement in their prediction accuracy.</p>
+                <img class="article-img">
+                <p>However, this technological revolution also raises important questions about market stability and regulatory oversight. Experts warn that the increasing reliance on AI systems could potentially amplify market volatility during unexpected events.</p>
+                <img class="article-img">
+            </div>
+        </article>
+
+        <hr>
+
+        <article>
+            <h1>Cybersecurity Threats: The Rising Concern of State-Sponsored Attacks</h1>
+            <div class="article-meta">
+                <span>Published: March 2024</span> • <span>4 min read</span>
+            </div>
+            <div class="article-content" style="text-align: justify;">
+                <p>State-sponsored cyber attacks have emerged as one of the most significant threats to global security in the 21st century. Recent investigations reveal a 300% increase in sophisticated cyber operations targeting critical infrastructure.</p>
+                <img class="section-header-img">
+                <p>The evolution of these attacks has forced organizations to completely reimagine their security protocols. Advanced persistent threats (APTs) now employ artificial intelligence and quantum computing capabilities, making traditional security measures increasingly obsolete.</p>
+                <img class="article-img">
+                <p>Experts predict that the next generation of cyber warfare will focus on disrupting AI systems and autonomous infrastructure, potentially causing cascading failures across interconnected networks.</p>
+                <img class="article-img">
+            </div>
+        </article>
+
+        <hr>
+
+        <article>
+            <h1>The Geopolitical Implications of Rare Earth Elements</h1>
+            <div class="article-meta">
+                <span>Published: March 2024</span> • <span>6 min read</span>
+            </div>
+            <div class="article-content" style="text-align: justify;">
+                <p>The global race for rare earth elements has intensified, with nations scrambling to secure their supply chains for these critical materials. China's dominance in the rare earth market, controlling approximately 80% of global production, has created significant geopolitical tensions.</p>
+                <img class="section-header-img">
+                <p>These elements, crucial for manufacturing everything from smartphones to military equipment, have become a powerful diplomatic tool. Recent trade disputes have highlighted the vulnerability of global supply chains and the urgent need for alternative sources.</p>
+                <img class="article-img">
+                <p>The transition to green technology has only increased demand for these materials, with electric vehicle production requiring significant amounts of neodymium and dysprosium. Countries are now investing heavily in rare earth mining and processing capabilities to reduce their dependence on existing supply chains.</p>
+                <img class="article-img">
+            </div>
+        </article>
+    </div>
+
+    <section id="social">
+        <h2 class="animated-text">Connect With Us</h2>
+        <p class="animated-text">Join our community across these platforms</p>
+        <div class="main">
+            <div class="up">
+                <a href="https://www.instagram.com/econ_tiet/" target="_blank">
+                    <button class="social-card instagram-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                        </svg>
+                    </button>
+                </a>
+                <a href="https://twitter.com/econ_espionage" target="_blank">
+                    <button class="social-card twitter-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p class="animated-text">&copy; 2025 Espionage. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
