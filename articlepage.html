@@ -56,32 +56,55 @@
             transform: translateY(-2px);
         }
         .tile-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            padding: 30px;
-            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .tile {
+        .blog-tile {
             background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 20px;
+            padding: 30px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-            display: grid;
-            grid-template-rows: 160px auto auto;
-            gap: 15px;
+            text-align: center;
         }
-        .tile:hover {
-            transform: translateY(-10px);
-            background: linear-gradient(145deg, #0066cc, #007bff);
+        .blog-tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
-        .tile a {
-            color: #ffffff;
-            text-decoration: none;
+        .tile-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            color: #999;
+            font-size: 0.9em;
+        }
+        .blog-title {
+            font-size: 2em;
             font-weight: bold;
-            display: block;
-            margin-top: 10px;
+            margin: 20px 0;
+            color: #ffffff;
+        }
+        .blog-content {
+            text-align: justify;
+            line-height: 1.6;
+            color: #dddddd;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .blog-content p {
+            margin-bottom: 15px;
         }
         section {
             padding: 20px;
@@ -393,151 +416,22 @@
             margin: 20px 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        .tile-image {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        .article-section {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
+        @media (max-width: 768px) {
+            .tile-container {
+                padding: 20px;
+            }
 
-        article {
-            margin-bottom: 80px;
-            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+            .blog-tile {
+                padding: 20px;
+            }
 
-        article h1 {
-            font-size: 2.5em;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-            background: linear-gradient(45deg, #ffffff, #e6e6e6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+            .tile-image {
+                height: 200px;
+            }
 
-        .article-content {
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin: 0;
-            padding: 0;
-        }
-
-        .article-content p:first-child {
-            margin-top: 20px;
-        }
-
-        .article-content p {
-            margin: 20px 0;
-            color: #e6e6e6;
-            font-size: 1.1em;
-            line-height: 1.8;
-            letter-spacing: 0.2px;
-        }
-
-        .article-img {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            margin: 30px auto;
-            display: block;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .article-img:hover {
-            transform: scale(1.02);
-        }
-
-        .section-header-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin: 20px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        hr {
-            margin: 60px 0;
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent
-            );
-        }
-        article {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        article:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .reading-time {
-            text-align: center;
-            color: #666;
-            font-size: 0.9em;
-            margin: 10px 0 20px 0;
-        }
-
-        .article-meta {
-            text-align: center;
-            color: #666;
-            font-size: 0.9em;
-            margin: 10px 0;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #social {
-            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-            padding: 60px 0;
-            margin-top: 40px;
-        }
-
-        #social h2 {
-            font-size: 2.5em;
-            margin-bottom: 1em;
-            background: linear-gradient(45deg, #ffffff, #e6e6e6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        article {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-
-        footer {
-            background: linear-gradient(to right, #000000, #1a1a1a);
-            padding: 30px 0;
-            margin-top: 60px;
-        }
-
-        footer p {
-            font-size: 0.9em;
-            opacity: 0.8;
+            .blog-title {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
@@ -551,61 +445,67 @@
                     <li><a href="articlepage.html" class="animated-text">Blogs</a></li>
                     <li><a href="index.html" class="animated-text">Recent Activity</a></li>
                     <li><a href="index.html" class="animated-text">Write for Us</a></li>
-                    <li><a href="#social" class="animated-text">Social Media</a></li>
+                    <li><a href="index.html" class="animated-text">Social Media</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+    
+    <div class="tile-container">
+        <div class="blog-tile">
+            <img src="https://images.unsplash.com/photo-1612383401582-e96cc0bc83d2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2hpbmElMjBtYXB8ZW58MHx8MHx8fDA%3D" alt="Cyber Security" class="tile-image">
+            <div class="blog-meta">
+                <span class="author">By Utkarsh Gupta</span>
+                <span class="date">August, 2023</span>
+            </div>
+            <h2 class="blog-title">China’s Pathetic $300 million Evergrande begs against USA</h2>
+            <div class="blog-content">
+                <p>The Real Estate Giant of China, Evergrande, has filed for bankruptcy in the United States, the affiliated companies under Evergrande have also filed for bankruptcy in Manhattan bankruptcy Court. This comes at the time when China’s economy is weakening and its exports are falling at a significant rate.
 
-    <div class="article-section">
-        <article>
-            <h1>China’s Pathetic $300 million Evergrande begs against USA</h1>
-            <div class="article-meta">
-                <span>Published: March 2024</span> • <span>5 min read</span>
+                    Evergrande has become the talk of the town in the debt crisis as China’s property crisis worsens. The firm has a total liabilities of around $300 billion. Various other property developers have defaulted since then in the country. Morgan Stanley this year has cut China’s growth to 4.7% which was predicted 5% back then.
+                    
+                    India’s move towards deflation is rather worrying one, when Evergrande’s news came world richest 500 person lost around $135 billion dollar in total, Elon Musk net worth fell by $7.2 billion, Jeff Bezos saw a decline upto $5.6 billion etc. Since most of the top celebrities do invest in such companies.
+                    
+                    China is looking to bring digital Yuan in order to avoid US sanctions and other restrictions in order to support Chinese governance systems. Interestingly China’s counterpart India has also proposed for Digital Rupee and it is working tremendously in the field. </p>
             </div>
-            <div class="article-content" style="text-align: justify;">
-                <p>Lorem</p>
-                <img class="section-header-img">
-                <p>Ipsum</p>
-                <img class="article-img">
-                <p>Lorem</p>
-                <img class="article-img">
-            </div>
-        </article>
+        </div>
 
-        <hr>
+        <div class="blog-tile">
+            <img src="https://images.unsplash.com/photo-1587649466301-136b87e7a7e9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5kaWElMjBuZXd8ZW58MHx8MHx8fDA%3D" alt="Data Analysis" class="tile-image">
+            <div class="blog-meta">
+                <span class="author">By Shivansh Singh</span>
+                <span class="date">August, 2020</span>
+            </div>
+            <h2 class="blog-title">Ingenuity: A dream in India?</h2>
+            <div class="blog-content">
+                <p>Innovation means the act to introduce a new process or to give a new shape. Indian research organisations have left an indelible impact on the Indian lifestyle and system of physical or mental directed in any task or duty. Yet, India doesn’t seem to be making any valuable progress to the needed Research and Development sector that could really solve all Indian problems.
 
-        <article>
-            <h1>Cybersecurity Threats: The Rising Concern of State-Sponsored Attacks</h1>
-            <div class="article-meta">
-                <span>Published: March 2024</span> • <span>4 min read</span>
+                    From the bird’s eye view, it seems that Indian hoi polloi has caused diminution of its own state by ruining its own very own culture of innovation. From the Vedic Ages, India has happened to be a very industrious and inventive country for its very own needs. From Sushruta to Chanakya, India had the world deceived by its wisdom and innovation.
+                    
+                    India, in the recent times, has become a hub of problems. Though, it becomes important to discuss them, for finding solutions. Let’s start conferring one of the biggest problems in India; Pollution. Now, this article doesn’t intend to bore its readers, yet, it plans to provide solutions for the same. Instead of those same hackneyed statistics, an innovation that surprises everyone-“KAALINK”.Now, in the spirit of curiosity, this simple device by a research firm in Bangalore could, basically, end all basic CO2 emissions, through recycling the release of CO2 from cars, industries, etc. to printable ink. Similarly, the solution for unemployment and economic recession seems pretty simple as well. The Indian economy, as explained by Nobel laureate Abhijeet Banerjee, needs a range of short-term high target policies and schemes through firms. These firms need the viable support of the government to sustain. Major land collectivisation under one firm and share its profits, according to investments, is what they need at agricultural level. This will give India a major rural Indian economy a boost. Another speaking problem was of the plastic garbage, which by IIT Madras, was recycled and put to use in making roads. These were much stronger and better than the previous ones. In Bangalore, a group of housewives established a firm, which made edible cutlery of different flavours replacing plastic cutlery. Another disastrous problem are the education facilities and their degrading quality. A teacher in Odisha, passed out of university of Florida, dealt with this problem. He designed two tests- photographic memory test and learning pattern test, through which he prescribed every student with his/her very own format for the child. However, the widespread use of such level of education is a pipe dream, till population doesn’t decrease to a manageable extent. On the other hand, for the first time, the executive did something phenomenal. Mohalla clinics of the Delhi Govt. received world-wide praise for their extensive coverage and quality of health.
+                    
+                    The motive of this article, to sum up, was to show the capabilities India has, beyond what our deceptive vision allows. I hope this article proved its worth and enlightened your curiosity. Let’s hope for a better future.</p>
             </div>
-            <div class="article-content" style="text-align: justify;">
-                <p>Lorem</p>
-                <img class="section-header-img">
-                <p>Brain rot</p>
-                <img class="article-img">
-                <p>Experts predict that the next generation of students have too much brain rot.</p>
-                <img class="article-img">
-            </div>
-        </article>
+        </div>
 
-        <hr>
+        <div class="blog-tile">
+            <img src="https://images.unsplash.com/photo-1501776553610-5b5c2107f93e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cG9saXRpY3N8ZW58MHx8MHx8fDA%3D" alt="Technology" class="tile-image">
+            <div class="blog-meta">
+                <span class="author">By Shivansh Singh</span>
+                <span class="date">2024</span>
+            </div>
+            <h2 class="blog-title">The problem with right-leaning Indian historians</h2>
+            <div class="blog-content">
+                <p>When this question is seen from the bird's eye view, we comprehend that Indian history has become biased from, not only political ends but also, miscellaneous other socio-economic existing differences, rather causing deep quandary in the mind of readers about what is correct and what is not.
 
-        <article>
-            <h1>The Geopolitical Implications of Rare Earth Elements</h1>
-            <div class="article-meta">
-                <span>Published: March 2024</span> • <span>6 min read</span>
+                    </p><p>If the readers may allow, I would like to divide the issue into 3 sub-points:-</p><p>
+                    
+                    The issue mentioned here has a two-sided nature. Just as a two-sided coin, this issue, too, has two faces. And to add, it is quite similar to the other situations. The first one is the approach of the right-wing to history. As to explain, there is to doubt, right-wing history has been neglected over time, by both, the education system and the intellectual or expert society. The education system, largely, rejected it, or for as they thought it was biased to follow facts from any side, though, the history presented was still incomplete. At the same time, the intellectual society claims that right-wing historians lack the basic knowledge of history, which should have been largely left to the reader's interpretation. To promote unbiased and expert opinions, they also neglect the Right Wing History. To be honest, the opinions may be unbiased and intellectual, but at the same time, they ignore many essential facts from both political ends, harming the very basic right of the reader; Knowledge. All the statements mentioned here apply to any biased opinion, irrespective of its political end.</p><p>
+                    Interpretation must be left to the reader. India has given the right to express itself to all of its citizens. I would like to quote a very prolific historian, Ramchandra Guha. He writes, in his book, India after Gandhi,” Those who write contemporary history know that the reader is not a passive whistle to receive the text place before him or her. The reader is also a citizen, a critical citizen, with individual political and ideological preferences. These preferences direct and dictate the reader’s view of the past and leaders and lawmakers most particularly… The farther back we go in time the less of a problem this is. Historians of the 18th century interpret and understand that time, and so, following them, do the readers. A biographer of Jefferson Napoleon can count on more trusting readers- they do not presume to know the things those men did or wish they should have done them differently. Here, the reader is usually happy to be led and guided by the expert. But the biography of John F. Kennedy or Charles de Gaulle is not so fortunate. Some, perhaps many, potential readers already know the 'truth' about these men, and are less willing to hear alternative of it, even if they're backed up with copious footnotes.”</p><p>
+                    The historian has the freedom of expression that all responsible citizens of India have. The historian has his preferences, sources and footnotes. We need to respect his opinion. I would like to quote Ramchandra Guha, again, from the same book. He writes,” The scholar who chooses to write on the Vietnam War already has strong views on the topic. The scholar who writes on the American Civil War would have less strong views and one who writes on the Revolutionary War weaker views still. For the historian as well as the citizen, the closer one gets to the present, the more judgemental one tends to become.”
+                    </p><p>Conclusion: India is a pluralist society. It is good to have different views, with due regard to India’s diversity. We must respect every opinion and try not to ignore any part of the history or view. The expert opinion is a must. We must give historians free space to write, with reliable sources. We must give a constructive relatable amount of criticism, respecting the historian’s room for error. The multi-views on one topic help the reader gain versatile and detailed knowledge. The reader’s discretion and interpretation must be respected and not be manipulated for personal gain or propaganda.</p>
             </div>
-            <div class="article-content" style="text-align: justify;">
-                <p>Blah</p>
-                <img class="section-header-img">
-                <p>Lorem</p>
-                <img class="article-img">
-                <p>Yap</p>
-                <img class="article-img">
-            </div>
-        </article>
+        </div>
     </div>
 
     <section id="social">
@@ -613,7 +513,7 @@
         <p class="animated-text">Join our community across these platforms</p>
         <div class="main">
             <div class="up">
-                <a href="https://www.instagram.com/econ_tiet/" target="_blank">
+                <a href="https://www.instagram.com/espionage.nexus/" target="_blank">
                     <button class="social-card instagram-card">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
@@ -634,6 +534,7 @@
     <footer>
         <p class="animated-text">&copy; 2025 Espionage. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
 
